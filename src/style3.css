@@ -1,0 +1,22 @@
+.dropdown {
+  height: 40px;
+  width: 100%;
+/*  padding: 30px;*/
+  /* margin: 10px;   */
+  /* margin-top: 15px; */
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+.text-xl {
+  color: black !important;
+  text-align: left !important;
+  font-weight: bold;
+  font-size: -webkit-xxx-large;
+  line-height: 0;
+  padding-right: 10px !important; 
+
+}
+
+
+
