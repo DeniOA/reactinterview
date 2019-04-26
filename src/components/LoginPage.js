@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import  { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 // import CreateAccount from './CreateAccount';
 
@@ -9,8 +10,37 @@ import Button from '@material-ui/core/Button';
 
 export class LoginPage extends Component {
 
- 
+  state = {
+    login: [{
+      clientId:"",
+      clientSecret:""
+    }]
+  }
 
+  onSubmit = (e) => {
+    //to prevent it from submitting to the actual file
+    e.preventDefault();
+
+    this.loginPage(this.state.login);
+    
+    //clear fields
+    this.setState({ clientId: '', clientSecret: ''});
+
+  }
+
+ loginPage = (clientId, clientSecret) => {
+
+    //To make a POST REQUEST
+    axios.post('https://staging.seerbitapigateway.com/cgw_bc/api/v1/auth' , {
+      clientId:"",
+      clientSecret:""
+      
+    })
+   
+    .then(res => this.setState({ login: [...this.state.login, res.data] }));
+  }
+
+  onChange =(e) => this.setState({ [e.target.name]: e.target.value});
 
   render() {
     return (
@@ -20,16 +50,19 @@ export class LoginPage extends Component {
         <p>  <img src="http://www.officialpsds.com/images/thumbs/Spiderman-Logo-psd59240.png" alt="Logo" title="Logo" width="138" /></p>
         <h1>CompanyName</h1>
         <h2>PLACEHOLDER</h2>
-      
-        <form>
+        (
+     
+        <form onSubmit={this.onSubmit}  >
           <div className="form-group">
           
-            <input type="text" id="phone-number" name="number" placeholder="Phone Number" />
+            <input type="text" id="phone-number" name="number" placeholder="Phone Number"  value = {this.state.clientId}
+        onChange={this.onChange} />
 
           </div>
           <div className="form-group">
            
-            <input type="text" id="pwd" name="password" placeholder="Password" />
+            <input type="text" id="pwd" name="password" placeholder="Password"  value = {this.state.clientId}
+        onChange={this.onChange} />
           </div>
         
           <button type="submit" className="btn">Login To Your Account </button>

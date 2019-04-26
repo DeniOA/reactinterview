@@ -2,10 +2,46 @@ import React, { Component } from 'react'
 import '../style2.css';
 import '../style3.css';
 
+import axios from 'axios';
 
 
 
 export class WalletLogin extends Component {
+
+
+  state = {
+    wallet: [{
+      clientId:""
+     
+    }]
+  }
+
+  onSubmit = (e) => {
+    //to prevent it from submitting to the actual file
+    e.preventDefault();
+
+    this.walletLogin(this.state.wallet);
+    
+    //clear fields
+    this.setState({ clientId: ''});
+
+  }
+
+ loginPage = (clientId, clientSecret) => {
+
+    //To make a POST REQUEST
+    axios.post('https://staging.seerbitapigateway.com/cgw_bc/api/v1/auth' , {
+      clientId:"",
+      
+    })
+   
+    .then(res => this.setState({ wallet: [...this.state.wallet, res.data] }));
+  }
+
+  onChange =(e) => this.setState({ [e.target.name]: e.target.value});
+
+
+
   render() {
     return (
       <div className="App">
@@ -15,7 +51,7 @@ export class WalletLogin extends Component {
             <h1>CompanyName</h1>
             <h2>PLACEHOLDER</h2>
             <p className="pt-3">Send money to anyone's Mobile number, Email Address or Bank Account, Receive money or just pay as invoice</p>
-          <form action="">
+          <form action=""  onSubmit={this.onSubmit} >
             <div className="form-group">
               <label for="bank">Choose Your Financial Institution</label>
               <select name="bank" class="dropdown" id="bank">
@@ -30,7 +66,8 @@ export class WalletLogin extends Component {
             </div>
             <div className="form-group">
               <label for="pwd">Enter Account Number</label>
-              <input type="text" id="pwd" name="name" placeholder="Account number" />
+              <input type="text" id="pwd" name="name" placeholder="Account number" value = {this.state.clientId}
+        onChange={this.onChange} />
             </div>
             <div className="text-xl">
 

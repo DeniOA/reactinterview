@@ -2,12 +2,6 @@ import React from 'react';
 
 import './App.css';
 
-
-
-
-
-
-
 import  { BrowserRouter as Router, Route,} from 'react-router-dom';
 
 import LoginPage from './components/LoginPage';
@@ -18,6 +12,8 @@ import WalletLogin from './components/WalletLogin';
 
 
 function App() {
+
+
 
   return (
 
@@ -33,6 +29,7 @@ function App() {
      <Route exact path='/createwallet' component={CreateWallet} />
      <Route exact path='/walletlogin' component={WalletLogin} />
     
+ 
     
      </div>
      </Router>
